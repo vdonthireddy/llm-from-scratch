@@ -16,7 +16,7 @@ Our entire dataset contains only three sentences, all of which are dialogues tak
 
 The vocabulary size determines the total number of **unique words** in our dataset. It can be calculated using the below formula, where **N** is the total number of words in our dataset.
 
-![vocab_size formula where N is total number of words](./images/7600/1*LYkmmxuX6sRGhPHL1f5Y1g.png)
+![vocab_size formula where N is total number of words](./images/7600/1_LYkmmxuX6sRGhPHL1f5Y1g.png)
 
 In order to find N, we need to break our dataset into individual words.
 
