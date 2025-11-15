@@ -8,7 +8,7 @@ I plan to explain the transformer and provide a complete guide with a step-by-st
 
 The dataset used for creating ChatGPT is **570 GB.** On the other hand, for our purposes, we will be using a very small dataset to perform numerical calculations visually.
 
-![Our entire dataset containing only three sentences](./images/1*PXhg5aLIuJiFDaR6NsVFew.png)
+![Our entire dataset containing only three sentences](./images/1_PXhg5aLIuJiFDaR6NsVFew.png)
 
 Our entire dataset contains only three sentences, all of which are dialogues taken from a TV show. Although our dataset is cleaned, in real-world scenarios like ChatGPT creation, cleaning a 570 GB dataset requires a significant amount of effort.
 
@@ -20,11 +20,11 @@ The vocabulary size determines the total number of **unique words** in our datas
 
 In order to find N, we need to break our dataset into individual words.
 
-![calculating variable **N**](./images/1*mVHFT-0cL-8KnDvLMNpOJA.png)
+![calculating variable **N**](./images/1_mVHFT-0cL-8KnDvLMNpOJA.png)
 
 After obtaining N, we perform a set operation to remove duplicates, and then we can count the unique words to determine the vocabulary size.
 
-![finding vocab size](./images/1*ob8UfKnG4pSDwKPluCXZjg.png)
+![finding vocab size](./images/1_ob8UfKnG4pSDwKPluCXZjg.png)
 
 Therefore, the vocabulary size is **23**, as there are **23** unique words in our dataset.
 
@@ -32,7 +32,7 @@ Therefore, the vocabulary size is **23**, as there are **23** unique words in ou
 
 Now, we need to assign a unique number to each unique word.
 
-![encoding our unique words](./images/1*2v7umtKxna92ypxPGTJMEw.png)
+![encoding our unique words](./images/1_2v7umtKxna92ypxPGTJMEw.png)
 
 As we have considered a single token as a single word and assigned a number to it, ChatGPT has considered a portion of a word as a single token using this formula: 1 Token = 0.75 Word
 
@@ -42,15 +42,15 @@ After encoding our entire dataset, it’s time to select our input and start wor
 
 Let’s select a sentence from our corpus that will be processed in our transformer architecture.
 
-![Input sentence for transformer](./images/1*ojmh3_rU8Z4PtjGfGMXHfQ.png)
+![Input sentence for transformer](./images/1_ojmh3_rU8Z4PtjGfGMXHfQ.png)
 
 We have selected our input, and we need to find an embedding vector for it. The original paper uses a **512-dimensional embedding vector** for each input word.
 
-![Original Paper uses 512 dimension vector](./images/1*K9NvPV-9SDHYiyPLfFOYGA.png)
+![Original Paper uses 512 dimension vector](./images/1_K9NvPV-9SDHYiyPLfFOYGA.png)
 
 Since, for our case, we need to work with a smaller dimension of embedding vector to visualize how the calculation is taking place. So, we will be using a dimension of 6 for the embedding vector.
 
-![Embedding vectors of our input](./images/1*G7Ggd7nEN856_zbuYZZoLw.png)
+![Embedding vectors of our input](./images/1_G7Ggd7nEN856_zbuYZZoLw.png)
 
 These values of the embedding vector are between 0 and 1 and are filled randomly in the beginning. They will later be updated as our transformer starts understanding the meanings among the words.
 
@@ -58,21 +58,21 @@ These values of the embedding vector are between 0 and 1 and are filled randomly
 
 Now we need to find positional embeddings for our input. There are two formulas for positional embedding depending on the position of the ith value of that embedding vector for each word.
 
-![Positional Embedding formula](./images/1*8r-S_gfexMsy19ppBX12ag.png)
+![Positional Embedding formula](./images/1_8r-S_gfexMsy19ppBX12ag.png)
 
 As you do know, our input sentence is **“when you play the game of thrones”** and the starting word is **“when” **with a starting index (POS) value is 0, having a dimension (d) of 6. For i from 0 to 5, we calculate the positional embedding for our first word of the input sentence.
 
-![Positional Embedding for word: **When**](./images/1*3kz44sGfStozgw_2aBIWjw.png)
+![Positional Embedding for word: **When**](./images/1_3kz44sGfStozgw_2aBIWjw.png)
 
 Similarly, we can calculate positional embedding for all the words in our input sentence.
 
-![Calculating Positional Embeddings of our input **(The calculated values are rounded)**](./images/1*Zyh9367itZlPnEZLqzv4fQ.png)
+![Calculating Positional Embeddings of our input **(The calculated values are rounded)**](./images/1_Zyh9367itZlPnEZLqzv4fQ.png)
 
 ## Step 6 — Concatenating Positional and Word Embeddings
 
 After calculating positional embedding, we need to add word embeddings and positional embeddings.
 
-![concatenation step](./images/1*-Canm4KHuFzuXePmsC4ZJw.png)
+![concatenation step](./images/1_-Canm4KHuFzuXePmsC4ZJw.png)
 
 This resultant matrix from combining both matrices (**Word embedding matrix **and **positional embedding matrix**) will be considered as an input to the encoder part.
 
@@ -80,57 +80,57 @@ This resultant matrix from combining both matrices (**Word embedding matrix **an
 
 A multi-head attention is comprised of many single-head attentions. It is up to us how many single heads we need to combine. For example, LLaMA LLM from Meta has used 32 single heads in the encoder architecture. Below is the illustrated diagram of how a single-head attention looks like.
 
-![Single Head attention in Transformer](./images/1*lB_CQAexlaU02D_dKF6XYQ.png)
+![Single Head attention in Transformer](./images/1_lB_CQAexlaU02D_dKF6XYQ.png)
 
 There are three inputs: **query**, **key**, and **value**. Each of these matrices is obtained by multiplying a different set of weights matrix from the **Transpose **of same matrix that we computed earlier by adding the word embedding and positional embedding matrix.
 
 Let’s say, for computing the query matrix, the set of weights matrix must have the number of rows the same as the number of columns of the transpose matrix, while the columns of the weights matrix can be any; for example, we suppose 4 columns in our weights matrix. The values in the weights matrix are between 0 and 1 randomly, which will later be updated when our transformer starts learning the meaning of these words.
 
-![calculating Query matrix](./images/1*E5whYIoC5RF3iHQkX_yTUw.png)
+![calculating Query matrix](./images/1_E5whYIoC5RF3iHQkX_yTUw.png)
 
 Similarly, we can compute the **key** and **value** matrices using the same procedure, but the values in the weights matrix must be different for both.
 
-![Calculating Key and Value Matrices](./images/1*chYDhzxZy0j8WPZH7eaZIw.png)
+![Calculating Key and Value Matrices](./images/1_chYDhzxZy0j8WPZH7eaZIw.png)
 
 So, after multiplying matrices, the resultant **query**, **key**, and **values** are obtained:
 
-![Query, Key, Value matrices](./images/1*dLl9JhTHacmBDRKFGXNPlg.png)
+![Query, Key, Value matrices](./images/1_dLl9JhTHacmBDRKFGXNPlg.png)
 
 Now that we have all three matrices, let’s start calculating single-head attention step by step.
 
-![matrix multiplication between Query and Key](./images/1*JuaC84jFOHHTke7jwRGUiw.png)
+![matrix multiplication between Query and Key](./images/1_JuaC84jFOHHTke7jwRGUiw.png)
 
 For scaling the resultant matrix, we have to reuse the dimension of our embedding vector, which is 6.
 
-![scaling the resultant matrix with dimension **5**](./images/1*Sd8OyZr_nQjT_FqeTM3q3g.png)
+![scaling the resultant matrix with dimension **5**](./images/1_Sd8OyZr_nQjT_FqeTM3q3g.png)
 
 The next step of **masking** **is** **optional**, and we won’t be calculating it. Masking is like telling the model to focus only on what’s happened before a certain point and not peek into the future while figuring out the importance of different words in a sentence. It helps the model understand things in a step-by-step manner, without cheating by looking ahead.
 
 So now we will be applying the **softmax** operation on our scaled resultant matrix.
 
-![Applying softmax on resultant matrix](./images/1*doJ5FUYSj21RtVXIAnrtmw.png)
+![Applying softmax on resultant matrix](./images/1_doJ5FUYSj21RtVXIAnrtmw.png)
 
 Doing the final multiplication step to obtain the resultant matrix from single-head attention.
 
-![calculating the final matrix of single head attention](./images/1*gyLQkyFnQ_zlrj84I9IIFQ.png)
+![calculating the final matrix of single head attention](./images/1_gyLQkyFnQ_zlrj84I9IIFQ.png)
 
 We have calculated single-head attention, while multi-head attention comprises many single-head attentions, as I stated earlier. Below is a visual of how it looks like:
 
-![Multi Head attention in Transformer](./images/1*YwdVB4szxRw0aUQ0SR784A.png)
+![Multi Head attention in Transformer](./images/1_YwdVB4szxRw0aUQ0SR784A.png)
 
 Each single-head attention has three inputs: **query**, **key**, and **value**, and each three have a different set of weights. Once all single-head attentions output their resultant matrices, they will all be concatenated, and the final concatenated matrix is once again transformed linearly by multiplying it with a set of weights matrix initialized with random values, which will later get updated when the transformer starts training.
 
 Since, in our case, we are considering a single-head attention, but this is how it looks if we are working with multi-head attention.
 
-![Single Head attention vs Multi Head attention](./images/1*J-gusetW_fuJXgAj9X8quQ.png)
+![Single Head attention vs Multi Head attention](./images/1_J-gusetW_fuJXgAj9X8quQ.png)
 
 In either case, whether it’s single-head or multi-head attention, the resultant matrix needs to be once again transformed linearly by multiplying a set of weights matrix.
 
-![normalizing single head attention matrix](./images/1*vMfGtR78ZkBfQ90xzl4WKw.png)
+![normalizing single head attention matrix](./images/1_vMfGtR78ZkBfQ90xzl4WKw.png)
 
 Make sure the linear set of weights matrix number of columns must be equal to the matrix that we computed earlier (**word embedding + positional embedding**) matrix number of columns, because the next step, we will be adding the resultant normalized matrix with (**word embedding + positional embedding**) matrix.
 
-![Output matrix of multi head attention](./images/1*nUkMToeFhWuIkZ56h9altQ.png)
+![Output matrix of multi head attention](./images/1_nUkMToeFhWuIkZ56h9altQ.png)
 
 As we have computed the resultant matrix for multi-head attention, next, we will be working on adding and normalizing step.
 
@@ -138,15 +138,15 @@ As we have computed the resultant matrix for multi-head attention, next, we will
 
 Once we obtain the resultant matrix from multi-head attention, we have to add it to our original matrix. Let’s do it first.
 
-![Adding matrices to perform add and norm step](./images/1*KNpA-drhNtO1MBeFeGyolA.png)
+![Adding matrices to perform add and norm step](./images/1_KNpA-drhNtO1MBeFeGyolA.png)
 
 To normalize the above matrix, we need to compute the mean and standard deviation row-wise for each row.
 
-![calculating meand and std.](./images/1*_wrRKKRM7EXVY8eLZLyNwQ.png)
+![calculating meand and std.](./images/1__wrRKKRM7EXVY8eLZLyNwQ.png)
 
 we subtract each value of the matrix by the corresponding row mean and divide it by the corresponding standard deviation.
 
-![normalizing the resultant matrix](./images/1*-ixsgxBG9mv4dg4LJwOj9Q.png)
+![normalizing the resultant matrix](./images/1_-ixsgxBG9mv4dg4LJwOj9Q.png)
 
 Adding a small value of error prevents the denominator from being zero and avoids making the entire term infinity.
 
@@ -154,21 +154,21 @@ Adding a small value of error prevents the denominator from being zero and avoid
 
 After normalizing the matrix, it will be processed through a feedforward network. We will be using a very basic network that contains only one linear layer and one ReLU activation function layer. This is how it looks like visually:
 
-![Feed Forward network comparison](./images/1*rdYzrzqaH30naDV427k3dA.png)
+![Feed Forward network comparison](./images/1_rdYzrzqaH30naDV427k3dA.png)
 
 First, we need to calculate the linear layer by multiplying our last calculated matrix with a random set of weights matrix, which will be updated when the transformer starts learning, and adding the resultant matrix to a bias matrix that also contains random values.
 
-![Calculating Linear Layer](./images/1*NDFTk3rHug9dKbmuHgT47g.png)
+![Calculating Linear Layer](./images/1_NDFTk3rHug9dKbmuHgT47g.png)
 
 After calculating the linear layer, we need to pass it through the ReLU layer and use its formula.
 
-![Calculating ReLU Layer](./images/1*1v8ozoEMHhNRf1NhFTSblQ.png)
+![Calculating ReLU Layer](./images/1_1v8ozoEMHhNRf1NhFTSblQ.png)
 
 ## Step 10 — Adding and Normalizing Again
 
 Once we obtain the resultant matrix from feed forward network, we have to add it to the matrix that is obtained from previous add and norm step, and then normalizing it using the row wise mean and standard deviation.
 
-![Add and Norm after Feed Forward Network](./images/1*Wa95_yn9E8I5h0NHiWiipw.png)
+![Add and Norm after Feed Forward Network](./images/1_Wa95_yn9E8I5h0NHiWiipw.png)
 
 The output matrix of this add and norm step will serve as the query and key matrix in one of the multi-head attention mechanisms present in the decoder part, which you can easily understand by tracing outward from the add and norm to the decoder section.
 
@@ -178,7 +178,7 @@ The good news is that up until now, we have calculated **Encoder part**, ****all
 
 Take a look at our transformer architecture. What we have covered so far and what we have to cover yet:
 
-![Upcoming steps illustration](./images/1*na7DVUsXIObNwjqsjvAKJA.png)
+![Upcoming steps illustration](./images/1_na7DVUsXIObNwjqsjvAKJA.png)
 
 We won’t be calculating the entire decoder because most of its portion contains similar calculations to what we have already done in the encoder. Calculating the decoder in detail would only make the blog lengthy due to repetitive steps. Instead, we only need to focus on the calculations of the input and output of the decoder.
 
@@ -192,17 +192,17 @@ The second input to the decoder is the predicted text. If you remember, our inpu
 
 But the predicted input text needs to follow a standard wrapping of tokens that make the transformer aware of where to start and where to end.
 
-![input comparison of encoder and decoder](./images/1*ad4SiZiYUxMKQu8SBe6a2g.png)
+![input comparison of encoder and decoder](./images/1_ad4SiZiYUxMKQu8SBe6a2g.png)
 
 Where <start> and <end> are two new tokens being introduced. Moreover, the decoder takes one token as an input at a time. It means that <start> will be served as an input, and you must be the predicted text for it.
 
-![Decoder input **<start> **word](./images/1*NcEJ0iDgKI77inXCybyR9Q.png)
+![Decoder input **<start> **word](./images/1_NcEJ0iDgKI77inXCybyR9Q.png)
 
 As we already know, these embeddings are filled with random values, which will later be updated during the training process.
 
 Compute rest of the blocks in the same way that we computed earlier in the encoder part.
 
-![Calculating Decoder](./images/1*h3CQNwApHPGicChhdoBB_A.png)
+![Calculating Decoder](./images/1_h3CQNwApHPGicChhdoBB_A.png)
 
 Before diving into any further details, we need to understand what masked multi-head attention is, using a simple mathematical example.
 
@@ -212,7 +212,7 @@ In a Transformer, the masked multi-head attention is like a spotlight that a mod
 
 Suppose we have the following input matrix, where each row represents a position in the sequence, and each column represents a feature:
 
-![inpur matrix for masked multi head attentions](./images/1*sTqKpYV2bIzuobu9svkuWw.png)
+![inpur matrix for masked multi head attentions](./images/1_sTqKpYV2bIzuobu9svkuWw.png)
 
 Now, let’s understand the masked multi-head attention components having two heads:
 
@@ -234,7 +234,7 @@ Assuming two conditions
 
 * ***Q*=*K*=*V*=Input Matrix**
 
-![Mask Multi Head Attention (**Two Heads**)](./images/1*h0Sqeddff4_Xd7I6UU-TrQ.png)
+![Mask Multi Head Attention (**Two Heads**)](./images/1_h0Sqeddff4_Xd7I6UU-TrQ.png)
 
 The concatenation step combines the outputs from the two attention heads into a single set of information. Imagine you have two friends who each give you advice on a problem. Concatenating their advice means putting both pieces of advice together so that you have a more complete view of what they suggest. In the context of the transformer model, this step helps capture different aspects of the input data from multiple perspectives, contributing to a richer representation that the model can use for further processing.
 
@@ -242,23 +242,23 @@ The concatenation step combines the outputs from the two attention heads into a 
 
 The output matrix of the last add and norm block of the decoder must contain the same number of rows as the input matrix, while the number of columns can be any. Here, we work with 6.
 
-![Add and Norm output of decoder](./images/1*5iOM08PiTouFxxm87Layww.png)
+![Add and Norm output of decoder](./images/1_5iOM08PiTouFxxm87Layww.png)
 
 The last **add and norm block** resultant matrix of the decoder must be flattened in order to match it with a linear layer to find the predicted probability of each unique word in our dataset (corpus).
 
-![flattened the last add and norm block matrix](./images/1*feNuBhdViJo_41qC9vey8Q.png)
+![flattened the last add and norm block matrix](./images/1_feNuBhdViJo_41qC9vey8Q.png)
 
 This flattened layer will be passed through a linear layer to compute the **logits** (scores) of each unique word in our dataset.
 
-![Calculating Logits](./images/1*BK_iGry8sF9XehIGxZtkLw.png)
+![Calculating Logits](./images/1_BK_iGry8sF9XehIGxZtkLw.png)
 
 Once we obtain the logits, we can use the **softmax** function to normalize them and find the word that contains the highest probability.
 
-![Finding the Predicted word](./images/1*BGmRI8tL1a6olqIaRkqNbw.png)
+![Finding the Predicted word](./images/1_BGmRI8tL1a6olqIaRkqNbw.png)
 
 So based on our calculations, the predicted word from the decoder is you.
 
-![Final output of decoder](./images/1*MRYreFD9RrT3KyQ7R-ww2A.png)
+![Final output of decoder](./images/1_MRYreFD9RrT3KyQ7R-ww2A.png)
 
 This predicted word you, will be treated as the input word for the decoder, and this process continues until the <end> token is predicted.
 
