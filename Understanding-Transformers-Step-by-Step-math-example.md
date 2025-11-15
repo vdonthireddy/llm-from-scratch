@@ -8,7 +8,7 @@ I plan to explain the transformer and provide a complete guide with a step-by-st
 
 The dataset used for creating ChatGPT is **570 GB.** On the other hand, for our purposes, we will be using a very small dataset to perform numerical calculations visually.
 
-![Our entire dataset containing only three sentences](https://cdn-images-1.medium.com/max/6944/1*PXhg5aLIuJiFDaR6NsVFew.png)
+![Our entire dataset containing only three sentences](./images/1*PXhg5aLIuJiFDaR6NsVFew.png)
 
 Our entire dataset contains only three sentences, all of which are dialogues taken from a TV show. Although our dataset is cleaned, in real-world scenarios like ChatGPT creation, cleaning a 570 GB dataset requires a significant amount of effort.
 
@@ -273,8 +273,5 @@ This predicted word you, will be treated as the input word for the decoder, and 
 ## Conclusion
 
 In this blog, I have shown you a very basic way of how transformers mathematically work using matrix approaches. We have applied positional encoding, softmax, feedforward network, and most importantly, multi-head attention.
-
-In the future, I will be posting more blogs on transformers and LLM as my core focus is on NLP. More importantly, if you want to build your own million-parameter LLM from scratch using Python, I have written a blog on it which has received a lot of appreciation on Medium. You can read it here:
-[Building a Million-Parameter LLM from Scratch Using Python](https://levelup.gitconnected.com/building-a-million-parameter-llm-from-scratch-using-python-f612398f06c2)
 
 **Have a great time reading!**
