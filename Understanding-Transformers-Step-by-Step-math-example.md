@@ -184,7 +184,7 @@ We won’t be calculating the entire decoder because most of its portion contain
 
 When training, there are two inputs to the decoder. One is from the encoder, where the output matrix of the last add and norm layer serves as the **query** and **key** for the second multi-head attention layer in the decoder part. Below is the visualization of it (from [**batool haider](https://www.youtube.com/watch?v=gJ9kaJsE78k&t=596s)**):
 
-![Visualization is from [**Batool Haider](https://www.youtube.com/watch?v=gJ9kaJsE78k&t=596s)**](./images/0*1_Zhg960nRqy9MIF.gif)
+![Visualization is from [**Batool Haider](https://www.youtube.com/watch?v=gJ9kaJsE78k&t=596s)**](./images/0_1_Zhg960nRqy9MIF.gif)
 
 While the value matrix comes from the decoder after the first **add and norm **step.
 
